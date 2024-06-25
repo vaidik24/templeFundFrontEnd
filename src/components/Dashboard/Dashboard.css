@@ -148,7 +148,7 @@
   margin-right: 8px; /* Reduced margin */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 14px; /* Reduced font size */
+  font-size: 12px; /* Reduced font size */
 }
 
 .donation-submit-button {
@@ -168,14 +168,14 @@
 
 .donations-table {
   width: 100%;
-  margin-top: 16px; /* Reduced margin */
+  margin-top: 14px; /* Reduced margin */
   border-collapse: collapse;
 }
 
 .donations-table th,
 .donations-table td {
   border: 1px solid #ddd;
-  padding: 8px; /* Reduced padding */
+  padding: 4px; /* Reduced padding */
   text-align: left;
 }
 
@@ -201,7 +201,7 @@
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 6px 8px; /* Reduced padding */
+  padding: 4px 6px; /* Reduced padding */
   margin-right: 5px;
   cursor: pointer;
 }
@@ -229,14 +229,14 @@
   .edit-event-input,
   .add-event-input {
     margin-right: 0;
-    margin-bottom: 8px; /* Reduced margin */
+    margin-bottom: 4px; /* Reduced margin */
   }
 
   .update-event-button,
   .add-event-button,
   .delete-event-button {
     margin-left: 0;
-    margin-bottom: 8px; /* Reduced margin */
+    margin-bottom: 4px; /* Reduced margin */
   }
 
   .donor-name,
@@ -245,7 +245,7 @@
     min-width: auto;
     width: 100%;
     text-align: left;
-    margin-bottom: 8px; /* Reduced margin */
+    margin-bottom: 4px; /* Reduced margin */
   }
 
   .donation-actions {
@@ -255,6 +255,6 @@
   .edit-donation-button,
   .update-donation-button,
   .delete-donation-button {
-    margin-right: 8px; /* Reduced margin */
+    margin-right: 4px; /* Reduced margin */
   }
 }
