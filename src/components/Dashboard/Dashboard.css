@@ -18,14 +18,14 @@
 }
 
 .dashboard-sidebar {
-  flex: 0.7;
+  flex: 0.8;
   margin-bottom: 20px;
   position: sticky; /* Keep sidebar fixed */
   top: 20px; /*Distance from top */
   height: auto; /* Adjust height to fit content */
   overflow-y: auto; /* Allow sidebar to scroll */
   background-color: #f5f5f5;
-  padding: 10px;
+  padding: 4px;
   border-radius: 8px;
   width: 50%;
 }
