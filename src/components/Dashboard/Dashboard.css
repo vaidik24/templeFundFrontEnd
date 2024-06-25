@@ -4,10 +4,10 @@
   flex-direction: column;
   min-width: 80%;
   margin: 0 auto;
-  padding: 20px;
+  padding: 16px; /* Reduced padding */
   background-color: #f5f5f5;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Reduced box shadow */
 }
 
 /* For larger screens */
@@ -19,11 +19,11 @@
 
 .dashboard-sidebar {
   flex: 0.8;
-  margin-bottom: 20px;
-  position: sticky; /* Keep sidebar fixed */
-  top: 20px; /*Distance from top */
-  height: auto; /* Adjust height to fit content */
-  overflow-y: auto; /* Allow sidebar to scroll */
+  margin-bottom: 16px; /* Reduced margin */
+  position: sticky;
+  top: 16px; /* Reduced top distance */
+  height: auto;
+  overflow-y: auto;
   background-color: #f5f5f5;
   padding: 4px;
   border-radius: 8px;
@@ -32,10 +32,10 @@
 
 .dashboard-content {
   flex: 2;
-  padding-left: 20px; /* Add padding to create separation from sidebar */
-  border-left: 1px solid #ddd; /* Add a border to visually separate sidebar and content */
-  overflow-y: auto; /* Allow content section to scroll */
-  max-height: calc(100vh - 120px); /* Adjust max height to fit content */
+  padding-left: 16px; /* Reduced padding */
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  max-height: calc(100vh - 120px);
 }
 
 @media (max-width: 767px) {
@@ -46,13 +46,13 @@
 }
 
 .sidebar-title {
-  font-size: 20px;
-  margin-bottom: 10px;
-  position: sticky; /* Keep sidebar title fixed */
-  top: 20px; /* Distance from top */
-  padding: 10px; /* Add padding for spacing */
-  border-bottom: 1px solid #ddd; /* Add a border bottom for separation */
-  z-index: 1; /* Ensure it's above other content */
+  font-size: 18px; /* Reduced font size */
+  margin-bottom: 8px; /* Reduced margin */
+  position: sticky;
+  top: 16px;
+  padding: 8px; /* Reduced padding */
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
 }
 
 .event-list {
@@ -64,7 +64,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding: 8px; /* Reduced padding */
   border-bottom: 1px solid #ddd;
 }
 
@@ -75,11 +75,11 @@
 .edit-event-input,
 .add-event-input {
   flex: 1;
-  padding: 8px;
+  padding: 6px; /* Reduced padding */
   margin-right: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
 }
 
 .update-event-button,
@@ -89,9 +89,9 @@
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 6px 10px; /* Reduced padding */
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px; /* Reduced font size */
   margin-left: 5px;
 }
 
@@ -106,14 +106,14 @@
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 6px 10px; /* Reduced padding */
   cursor: pointer;
-  font-size: 14px;
+  font-size: 12px; /* Reduced font size */
   text-decoration: none;
-  position: sticky; /* Keep export button fixed */
-  top: 20px; /* Distance from top */
-  z-index: 1; /* Ensure it's above other content */
-  margin-top: 10px; /* Adjust margin as needed */
+  position: sticky;
+  top: 16px;
+  z-index: 1;
+  margin-top: 10px;
 }
 
 .export-button:hover {
@@ -124,31 +124,31 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 20px;
-  margin-top: 20px;
-  position: sticky; /* Keep event details title fixed */
-  background-color: #f5f5f5; /* Ensure it's visible against content */
-  padding: 10px; /* Add padding for spacing */
-  border-bottom: 1px solid #ddd; /* Add a border bottom for separation */
-  z-index: 1; /* Ensure it's above other content */
+  font-size: 18px; /* Reduced font size */
+  margin-top: 16px; /* Reduced margin */
+  position: sticky;
+  background-color: #f5f5f5;
+  padding: 8px; /* Reduced padding */
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
 }
 
 .donation-form {
-  margin-top: 20px;
-  position: sticky; /* Keep donation form fixed */
-  top: 20px; /* Distance from top */
-  z-index: 1; /* Ensure it's above other content */
-  background-color: #fff; /* Ensure it's visible against content */
-  padding: 10px; /* Add padding for spacing */
-  border-radius: 4px; /* Rounded corners */
+  margin-top: 16px; /* Reduced margin */
+  position: sticky;
+  top: 16px;
+  z-index: 1;
+  background-color: #fff;
+  padding: 8px; /* Reduced padding */
+  border-radius: 4px;
 }
 
 .form-input {
-  padding: 8px;
-  margin-right: 10px;
+  padding: 6px; /* Reduced padding */
+  margin-right: 8px; /* Reduced margin */
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-size: 16px;
+  font-size: 14px; /* Reduced font size */
 }
 
 .donation-submit-button {
@@ -156,10 +156,10 @@
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 6px 10px; /* Reduced padding */
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px; /* Adjust margin as needed */
+  font-size: 14px; /* Reduced font size */
+  margin-top: 10px;
 }
 
 .donation-submit-button:hover {
@@ -168,14 +168,14 @@
 
 .donations-table {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 16px; /* Reduced margin */
   border-collapse: collapse;
 }
 
 .donations-table th,
 .donations-table td {
   border: 1px solid #ddd;
-  padding: 10px;
+  padding: 8px; /* Reduced padding */
   text-align: left;
 }
 
@@ -185,11 +185,11 @@
 
 .donor-name,
 .donation-amount {
-  min-width: 150px;
+  min-width: 120px; /* Reduced min-width */
 }
 
 .donation-actions {
-  min-width: 120px;
+  min-width: 100px; /* Reduced min-width */
   display: flex;
   align-items: center;
 }
@@ -201,7 +201,7 @@
   color: #fff;
   border: none;
   border-radius: 4px;
-  padding: 6px 10px;
+  padding: 6px 8px; /* Reduced padding */
   margin-right: 5px;
   cursor: pointer;
 }
@@ -229,14 +229,14 @@
   .edit-event-input,
   .add-event-input {
     margin-right: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduced margin */
   }
 
   .update-event-button,
   .add-event-button,
   .delete-event-button {
     margin-left: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduced margin */
   }
 
   .donor-name,
@@ -245,7 +245,7 @@
     min-width: auto;
     width: 100%;
     text-align: left;
-    margin-bottom: 10px;
+    margin-bottom: 8px; /* Reduced margin */
   }
 
   .donation-actions {
@@ -255,6 +255,6 @@
   .edit-donation-button,
   .update-donation-button,
   .delete-donation-button {
-    margin-right: 10px;
+    margin-right: 8px; /* Reduced margin */
   }
 }
