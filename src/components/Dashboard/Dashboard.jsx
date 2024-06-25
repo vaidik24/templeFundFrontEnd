@@ -3,7 +3,9 @@ import "./Dashboard.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { CSVLink } from "react-csv";
+import fileDownload from "js-file-download";
 
+// http://localhost:5000
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -111,24 +113,43 @@ const Dashboard = () => {
     e.preventDefault();
     const amount = parseInt(e.target.amount.value);
     const fullName = e.target.fullName.value;
-    if (amount > 0 && fullName.trim() !== "" && selectedEvent) {
+    const village = e.target.village.value;
+    if (
+      amount > 0 &&
+      fullName.trim() !== "" &&
+      village.trim() !== "" &&
+      selectedEvent
+    ) {
       try {
         const response = await fetch(
+          `https://templefundbackend.onrender.com/donations/${selectedEvent}/nextSrNo`,
+          {
+            method: "GET",
+          }
+        );
+        const { nextSrNo } = await response.json();
+
+        const newDonation = {
+          srNo: nextSrNo,
+          eventId: selectedEvent,
+          amount: amount,
+          fullName: fullName.trim(),
+          village: village.trim(),
+        };
+
+        const addResponse = await fetch(
           "https://templefundbackend.onrender.com/donations",
           {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              eventId: selectedEvent,
-              amount,
-              fullName: fullName.trim(),
-            }),
+            body: JSON.stringify(newDonation),
           }
         );
-        const newDonation = await response.json();
-        setDonations([...donations, newDonation]);
+
+        const addedDonation = await addResponse.json();
+        setDonations([...donations, addedDonation]);
         e.target.reset();
       } catch (error) {
         console.error("Error adding donation:", error);
@@ -152,8 +173,10 @@ const Dashboard = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              srNo: editingDonation.srNo,
               amount: editingDonation.amount,
               fullName: editingDonation.fullName,
+              village: editingDonation.village,
             }),
           }
         );
@@ -178,7 +201,22 @@ const Dashboard = () => {
           method: "DELETE",
         }
       );
-      setDonations(donations.filter((d) => d._id !== donationId));
+      const updatedDonations = donations
+        .filter((d) => d._id !== donationId)
+        .map((donation, index) => ({ ...donation, srNo: index + 1 }));
+
+      setDonations(updatedDonations);
+
+      await fetch(
+        `https://templefundbackend.onrender.com/donations/updateSrNo`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ donations: updatedDonations }),
+        }
+      );
     } catch (error) {
       console.error("Error deleting donation:", error);
     }
@@ -193,9 +231,23 @@ const Dashboard = () => {
   );
 
   const csvData = donations.map((donation) => ({
+    srNo: donation.srNo,
     amount: donation.amount,
     fullName: donation.fullName,
+    village: donation.village,
   }));
+
+  const generateWordDocument = () => {
+    let docContent = `Event: ${selectedEventDetails.name}\n\nDonations:\n`;
+    donations.forEach((donation) => {
+      docContent += `${donation.srNo}.  `;
+      docContent += `${donation.amount}   `;
+      docContent += `${donation.fullName}  `;
+      docContent += `${donation.village}\n`;
+    });
+
+    fileDownload(docContent, `${selectedEventDetails.name}.doc`);
+  };
 
   return (
     <div className="dashboard-container">
@@ -262,14 +314,21 @@ const Dashboard = () => {
             <form onSubmit={handleAddDonation} className="donation-form">
               <h2 className="event-details-title">
                 Event: {selectedEventDetails.name}
+                <CSVLink
+                  data={csvData}
+                  className="export-button"
+                  filename={`${selectedEventDetails.name}.csv`}
+                >
+                  Export to Excel
+                </CSVLink>
+                <button
+                  onClick={generateWordDocument}
+                  className="export-button"
+                >
+                  Export to Word
+                </button>
               </h2>
-              <CSVLink
-                data={csvData}
-                className="export-button"
-                filename="donations.csv"
-              >
-                Export to Excel
-              </CSVLink>
+
               <input
                 type="text"
                 name="fullName"
@@ -284,6 +343,13 @@ const Dashboard = () => {
                 required
                 className="form-input"
               />
+              <input
+                type="text"
+                name="village"
+                placeholder="Village"
+                required
+                className="form-input"
+              />
 
               <button type="submit" className="donation-submit-button">
                 Add Donation
@@ -292,14 +358,34 @@ const Dashboard = () => {
             <table className="donations-table">
               <thead>
                 <tr>
+                  <th>Sr. No</th>
                   <th>Full Name</th>
                   <th>Amount</th>
+                  <th>Village</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {donations.map((donation) => (
                   <tr key={donation._id} className="donation-row">
+                    <td className="donation-srNo">
+                      {editingDonation?._id === donation._id ? (
+                        <input
+                          type="number"
+                          value={editingDonation.srNo}
+                          onChange={(e) =>
+                            setEditingDonation({
+                              ...editingDonation,
+                              srNo: e.target.value,
+                            })
+                          }
+                          className="form-input"
+                          disabled
+                        />
+                      ) : (
+                        donation.srNo
+                      )}
+                    </td>
                     <td className="donor-name">
                       {editingDonation?._id === donation._id ? (
                         <input
@@ -332,6 +418,23 @@ const Dashboard = () => {
                         />
                       ) : (
                         donation.amount
+                      )}
+                    </td>
+                    <td className="donation-village">
+                      {editingDonation?._id === donation._id ? (
+                        <input
+                          type="text"
+                          value={editingDonation.village}
+                          onChange={(e) =>
+                            setEditingDonation({
+                              ...editingDonation,
+                              village: e.target.value,
+                            })
+                          }
+                          className="form-input"
+                        />
+                      ) : (
+                        donation.village
                       )}
                     </td>
                     <td className="donation-actions">
