@@ -1,0 +1,257 @@
+/* General styles */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* For larger screens */
+@media (min-width: 768px) {
+  .dashboard-container {
+    flex-direction: row;
+  }
+}
+
+.dashboard-sidebar {
+  flex: 1;
+  margin-bottom: 20px;
+  position: sticky; /* Keep sidebar fixed */
+  top: 20px; /* Distance from top */
+  height: auto; /* Adjust height to fit content */
+  overflow-y: auto; /* Allow sidebar to scroll */
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.dashboard-content {
+  flex: 2;
+  padding-left: 20px; /* Add padding to create separation from sidebar */
+  border-left: 1px solid #ddd; /* Add a border to visually separate sidebar and content */
+  overflow-y: auto; /* Allow content section to scroll */
+  max-height: calc(100vh - 120px); /* Adjust max height to fit content */
+}
+
+@media (max-width: 767px) {
+  .dashboard-content {
+    padding-left: 0;
+    border-left: none;
+  }
+}
+
+.sidebar-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  position: sticky; /* Keep sidebar title fixed */
+  top: 20px; /* Distance from top */
+  padding: 10px; /* Add padding for spacing */
+  border-bottom: 1px solid #ddd; /* Add a border bottom for separation */
+  z-index: 1; /* Ensure it's above other content */
+}
+
+.event-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.event-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.event-item span {
+  cursor: pointer;
+}
+
+.edit-event-input,
+.add-event-input {
+  flex: 1;
+  padding: 8px;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.update-event-button,
+.add-event-button,
+.delete-event-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.update-event-button:hover,
+.add-event-button:hover,
+.delete-event-button:hover {
+  background-color: #2980b9;
+}
+
+.export-button {
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  position: sticky; /* Keep export button fixed */
+  top: 20px; /* Distance from top */
+  z-index: 1; /* Ensure it's above other content */
+  margin-top: 10px; /* Adjust margin as needed */
+  margin-right: 10px;
+}
+
+.export-button:hover {
+  background-color: #27ae60;
+}
+
+.event-details-title {
+  font-size: 20px;
+  margin-top: 20px;
+  position: sticky; /* Keep event details title fixed */
+  background-color: #f5f5f5; /* Ensure it's visible against content */
+  padding: 10px; /* Add padding for spacing */
+  border-bottom: 1px solid #ddd; /* Add a border bottom for separation */
+  z-index: 1; /* Ensure it's above other content */
+}
+
+.donation-form {
+  margin-top: 20px;
+  position: sticky; /* Keep donation form fixed */
+  top: 20px; /* Distance from top */
+  z-index: 1; /* Ensure it's above other content */
+  background-color: #fff; /* Ensure it's visible against content */
+  padding: 10px; /* Add padding for spacing */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.form-input {
+  padding: 8px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.donation-submit-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px; /* Adjust margin as needed */
+}
+
+.donation-submit-button:hover {
+  background-color: #2980b9;
+}
+
+.donations-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.donations-table th,
+.donations-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.donation-row:hover {
+  background-color: #f2f2f2;
+}
+
+.donor-name,
+.donation-amount {
+  min-width: 150px;
+}
+
+.donation-actions {
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+}
+
+.edit-donation-button,
+.update-donation-button,
+.delete-donation-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.edit-donation-button:hover,
+.update-donation-button:hover,
+.delete-donation-button:hover {
+  background-color: #2980b9;
+}
+
+/* Media Queries for Smaller Screens */
+@media (max-width: 767px) {
+  .dashboard-sidebar {
+    position: relative;
+    top: 0;
+    height: auto;
+    margin-right: 0;
+  }
+
+  .event-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .edit-event-input,
+  .add-event-input {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .update-event-button,
+  .add-event-button,
+  .delete-event-button {
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .donor-name,
+  .donation-amount,
+  .donation-actions {
+    min-width: auto;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .donation-actions {
+    justify-content: flex-start;
+  }
+
+  .edit-donation-button,
+  .update-donation-button,
+  .delete-donation-button {
+    margin-right: 10px;
+  }
+}
