@@ -27,10 +27,10 @@ const App = () => {
     <div className="app">
       {isLoggedIn ? (
         <>
-          <Dashboard onLogout={handleLogout} />
           <button onClick={handleLogout} className="logout-button-fixed">
             Logout
           </button>
+          <Dashboard onLogout={handleLogout} />
         </>
       ) : (
         <Login onLogin={handleLogin} />
