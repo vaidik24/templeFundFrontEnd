@@ -271,12 +271,12 @@ body {
   }
 
   .dashboard-sidebar {
-    width: 25%;
-    max-width: 300px;
+    width: 22%;
+    max-width: 280px;
   }
 
   .dashboard-content {
-    width: 75%;
+    width: 70%;
   }
 }
 
