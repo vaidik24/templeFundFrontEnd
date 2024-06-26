@@ -6,6 +6,7 @@ import { CSVLink } from "react-csv";
 import fileDownload from "js-file-download";
 
 // http://localhost:5000
+//https://templefundbackend.onrender.com
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -231,10 +232,11 @@ const Dashboard = () => {
   );
 
   const csvData = donations.map((donation) => ({
-    srNo: donation.srNo,
-    amount: donation.amount,
-    fullName: donation.fullName,
-    village: donation.village,
+    SrNo: donation.srNo,
+    Amount: donation.amount,
+    FullName: donation.fullName,
+    Village: donation.village,
+    Date: new Date(donation.date).toLocaleDateString(),
   }));
 
   const generateWordDocument = () => {
@@ -243,7 +245,8 @@ const Dashboard = () => {
       docContent += `${donation.srNo}.  `;
       docContent += `${donation.amount}   `;
       docContent += `${donation.fullName}  `;
-      docContent += `${donation.village}\n`;
+      docContent += `${donation.village}   `;
+      docContent += `${new Date(donation.date).toLocaleDateString()}\n `;
     });
 
     fileDownload(docContent, `${selectedEventDetails.name}.doc`);
@@ -362,6 +365,7 @@ const Dashboard = () => {
                   <th>Full Name</th>
                   <th>Amount</th>
                   <th>Village</th>
+                  <th>Date</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -435,6 +439,24 @@ const Dashboard = () => {
                         />
                       ) : (
                         donation.village
+                      )}
+                    </td>
+                    <td className="donation-date">
+                      {editingDonation?._id === donation._id ? (
+                        <input
+                          type="date"
+                          value={editingDonation.date}
+                          onChange={(e) =>
+                            setEditingDonation({
+                              ...editingDonation,
+                              date: e.target.value,
+                            })
+                          }
+                          className="form-input"
+                          disabled
+                        />
+                      ) : (
+                        new Date(donation.date).toLocaleDateString()
                       )}
                     </td>
                     <td className="donation-actions">
