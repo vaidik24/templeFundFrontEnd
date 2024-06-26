@@ -1,260 +1,259 @@
-/* General styles */
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 80%;
-  margin: 0 auto;
-  padding: 16px; /* Reduced padding */
-  background-color: #f5f5f5;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Reduced box shadow */
+/* Dashboard.css */
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
 }
 
-/* For larger screens */
-@media (min-width: 768px) {
-  .dashboard-container {
-    flex-direction: row;
-  }
+.dashboard-container {
+  display: flex;
+  height: 100vh;
 }
 
 .dashboard-sidebar {
-  flex: 0.8;
-  margin-bottom: 16px; /* Reduced margin */
-  position: sticky;
-  top: 16px; /* Reduced top distance */
-  height: auto;
+  width: 20%;
+  background-color: #1a202c;
+  color: white;
+  padding: 20px;
   overflow-y: auto;
-  background-color: #f5f5f5;
-  padding: 4px;
-  border-radius: 8px;
-  width: 50%;
-}
-
-.dashboard-content {
-  flex: 2;
-  padding-left: 16px; /* Reduced padding */
-  border-left: 1px solid #ddd;
-  overflow-y: auto;
-  max-height: calc(100vh - 120px);
-}
-
-@media (max-width: 767px) {
-  .dashboard-content {
-    padding-left: 0;
-    border-left: none;
-  }
+  position: relative;
+  transition: transform 0.3s ease;
 }
 
 .sidebar-title {
-  font-size: 18px; /* Reduced font size */
-  margin-bottom: 8px; /* Reduced margin */
-  position: sticky;
-  top: 16px;
-  padding: 8px; /* Reduced padding */
-  border-bottom: 1px solid #ddd;
-  z-index: 1;
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.add-event-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.add-event-input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: transform 0.2s ease;
+}
+
+.add-event-button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.add-event-button:hover {
+  background-color: #45a049;
 }
 
 .event-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
 }
 
 .event-item {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 8px; /* Reduced padding */
-  border-bottom: 1px solid #ddd;
+  align-items: center;
+  padding: 10px;
+  background-color: #2d3748;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  animation: slideIn 0.5s ease forwards;
+}
+
+.event-item:hover {
+  transform: translateX(10px);
+  background-color: #4a5568;
 }
 
 .event-item span {
-  cursor: pointer;
+  flex-grow: 1;
 }
 
-.edit-event-input,
-.add-event-input {
-  flex: 1;
-  padding: 6px; /* Reduced padding */
-  margin-right: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 14px; /* Reduced font size */
-}
-
-.update-event-button,
-.add-event-button,
-.delete-event-button {
-  background-color: #3498db;
-  color: #fff;
+.event-item button {
+  background: none;
   border: none;
-  border-radius: 4px;
-  padding: 6px 10px; /* Reduced padding */
+  color: white;
   cursor: pointer;
-  font-size: 12px; /* Reduced font size */
-  margin-left: 5px;
 }
 
-.update-event-button:hover,
-.add-event-button:hover,
 .delete-event-button:hover {
-  background-color: #2980b9;
+  color: #e53e3e;
 }
 
-.export-button {
-  background-color: #2ecc71;
-  color: #fff;
+.edit-event-input {
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #cbd5e0;
+  margin-right: 5px;
+}
+
+.update-event-button {
+  padding: 5px;
+  background-color: #4a5568;
+  color: white;
   border: none;
-  border-radius: 4px;
-  padding: 6px 10px; /* Reduced padding */
+  border-radius: 3px;
   cursor: pointer;
-  font-size: 12px; /* Reduced font size */
-  text-decoration: none;
-  position: sticky;
-  top: 16px;
-  z-index: 1;
-  margin-top: 10px;
 }
 
-.export-button:hover {
-  background-color: #27ae60;
+.dashboard-content {
+  width: 80%;
+  padding: 20px;
+  overflow-y: auto;
+  position: relative;
+  transition: transform 0.3s ease;
 }
 
 .event-details-title {
+  font-size: 24px;
+  margin-bottom: 20px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-size: 18px; /* Reduced font size */
-  margin-top: 16px; /* Reduced margin */
-  position: sticky;
-  background-color: #f5f5f5;
-  padding: 8px; /* Reduced padding */
-  border-bottom: 1px solid #ddd;
-  z-index: 1;
+  align-items: center;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .donation-form {
-  margin-top: 16px; /* Reduced margin */
-  position: sticky;
-  top: 16px;
-  z-index: 1;
-  background-color: #fff;
-  padding: 8px; /* Reduced padding */
-  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .form-input {
-  padding: 6px; /* Reduced padding */
-  margin-right: 8px; /* Reduced margin */
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 12px; /* Reduced font size */
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #cbd5e0;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  transition: transform 0.2s ease;
 }
 
 .donation-submit-button {
-  background-color: #3498db;
-  color: #fff;
+  background-color: #3182ce;
+  color: white;
+  padding: 10px;
   border: none;
-  border-radius: 4px;
-  padding: 6px 10px; /* Reduced padding */
   cursor: pointer;
-  font-size: 14px; /* Reduced font size */
-  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .donation-submit-button:hover {
-  background-color: #2980b9;
+  background-color: #2b6cb0;
 }
 
 .donations-table {
   width: 100%;
-  margin-top: 14px; /* Reduced margin */
   border-collapse: collapse;
+  margin-top: 20px;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .donations-table th,
 .donations-table td {
-  border: 1px solid #ddd;
-  padding: 4px; /* Reduced padding */
+  border: 1px solid #cbd5e0;
+  padding: 10px;
   text-align: left;
 }
 
+.donations-table th {
+  background-color: #2d3748;
+  color: white;
+}
+
+.donations-table td {
+  background-color: #f7fafc;
+}
+
+.donation-row {
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
 .donation-row:hover {
-  background-color: #f2f2f2;
+  background-color: #e2e8f0;
+  transform: scale(1.02);
 }
 
-.donor-name,
-.donation-amount {
-  min-width: 120px; /* Reduced min-width */
-}
-
-.donation-actions {
-  min-width: 100px; /* Reduced min-width */
-  display: flex;
-  align-items: center;
-}
-
-.edit-donation-button,
-.update-donation-button,
-.delete-donation-button {
-  background-color: #3498db;
-  color: #fff;
+.update-donation-button {
+  background-color: #38a169;
+  color: white;
   border: none;
-  border-radius: 4px;
-  padding: 4px 6px; /* Reduced padding */
-  margin-right: 5px;
+  padding: 5px;
+  border-radius: 3px;
   cursor: pointer;
 }
 
-.edit-donation-button:hover,
-.update-donation-button:hover,
-.delete-donation-button:hover {
-  background-color: #2980b9;
+.update-donation-button:hover {
+  background-color: #2f855a;
 }
 
-/* Media Queries for Smaller Screens */
-@media (max-width: 767px) {
-  .dashboard-sidebar {
-    position: relative;
-    top: 0;
-    height: auto;
-    margin-right: 0;
-  }
+.edit-donation-button,
+.delete-donation-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-  .event-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.edit-donation-button:hover {
+  color: #3182ce;
+}
 
-  .edit-event-input,
-  .add-event-input {
-    margin-right: 0;
-    margin-bottom: 4px; /* Reduced margin */
-  }
+.delete-donation-button:hover {
+  color: #e53e3e;
+}
 
-  .update-event-button,
-  .add-event-button,
-  .delete-event-button {
-    margin-left: 0;
-    margin-bottom: 4px; /* Reduced margin */
-  }
+.export-button {
+  background-color: #4a5568;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+  margin-left: 10px;
+}
 
-  .donor-name,
-  .donation-amount,
-  .donation-actions {
-    min-width: auto;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 4px; /* Reduced margin */
-  }
+.export-button:hover {
+  background-color: #2d3748;
+}
 
-  .donation-actions {
-    justify-content: flex-start;
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
 
-  .edit-donation-button,
-  .update-donation-button,
-  .delete-donation-button {
-    margin-right: 4px; /* Reduced margin */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
   }
 }
