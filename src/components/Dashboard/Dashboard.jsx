@@ -273,7 +273,7 @@ const Dashboard = () => {
     donations.forEach((donation) => {
       docContent += `${donation.srNo}.  `;
       docContent += `${new Date(donation.date).toLocaleDateString()}   `;
-      docContent += `${donation.amount}   `;
+      docContent += `${donation.amount}/-  `;
       docContent += `${donation.fullName}  `;
       docContent += `${donation.village}\n`;
     });
@@ -285,7 +285,7 @@ const Dashboard = () => {
     donations.forEach((donation) => {
       docContent += `${donation.srNo}.  `;
       docContent += `${new Date(donation.date).toLocaleDateString()}   `;
-      docContent += `${donation.amount}   `;
+      docContent += `${donation.amount}/-   `;
       docContent += `${donation.fullName}  `;
       docContent += `${donation.village}\n`;
     });
