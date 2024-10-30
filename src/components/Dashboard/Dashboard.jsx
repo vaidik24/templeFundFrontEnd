@@ -4,10 +4,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { CSVLink } from "react-csv";
 import fileDownload from "js-file-download";
+import html2pdf from "html2pdf.js";
 
 // http://localhost:5000
 //https://templefundbackend.onrender.com
 const Dashboard = () => {
+  const villages = [
+    "धम्बोला",
+    "सिमलवाडा",
+    "नानावाडा",
+    "मालपुर",
+    "मोडासा",
+    "अहमदाबाद",
+    "डूंगरपुर",
+    "उदयपुर",
+    "जयपुर",
+    "रामसौर",
+    "करावाडा",
+    "मुंबई",
+    "धम्बोला श्री आशाराम काका",
+    "धम्बोला श्री बेणेश्वर",
+    "धम्बोला श्री नानाराम",
+    "धम्बोला मेहता कुटुंब",
+    "धम्बोला माहेश्वर [ काकावारा ]",
+    "धम्बोला भायला भट्ट",
+    "धम्बोला रडीयता भट्ट (दादा भट्ट )",
+    "धम्बोला हरिदत्त",
+    "धम्बोला इच्छाराम",
+    "धम्बोला हरिदास (घोराड )",
+    "धम्बोला त्रिवेदी कुटुंब",
+    "धम्बोला सदाराम कुटुंब",
+  ];
+
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [newEventName, setNewEventName] = useState("");
@@ -114,7 +142,8 @@ const Dashboard = () => {
     e.preventDefault();
     const amount = parseInt(e.target.amount.value);
     const fullName = e.target.fullName.value;
-    const village = e.target.village.value;
+    const village = e.target.village.value; // This will now correctly reference the village input
+
     if (
       amount > 0 &&
       fullName.trim() !== "" &&
@@ -251,6 +280,47 @@ const Dashboard = () => {
 
     fileDownload(docContent, `${selectedEventDetails.name}.doc`);
   };
+  const generatePDF = () => {
+    let docContent = `Event: ${selectedEventDetails.name}\n\nDonations:\n`;
+    donations.forEach((donation) => {
+      docContent += `${donation.srNo}.  `;
+      docContent += `${new Date(donation.date).toLocaleDateString()}   `;
+      docContent += `${donation.amount}   `;
+      docContent += `${donation.fullName}  `;
+      docContent += `${donation.village}\n`;
+    });
+
+    // Create a temporary HTML element to hold the content
+    const pdfContent = `
+        <div style="font-family: Arial, sans-serif; padding: 20px;">
+            <h1>${selectedEventDetails.name}</h1>
+            <h2>Donations</h2>
+            <pre>${docContent}</pre>
+        </div>
+    `;
+
+    // Create a Blob from the HTML string
+    const blob = new Blob([pdfContent], { type: "text/html" });
+    const url = URL.createObjectURL(blob);
+
+    // Create a new iframe to load the HTML content
+    const iframe = document.createElement("iframe");
+    iframe.style.display = "none";
+    document.body.appendChild(iframe);
+    iframe.src = url;
+
+    iframe.onload = () => {
+      // Use html2pdf.js to convert the HTML to PDF
+      html2pdf()
+        .from(iframe.contentDocument.body)
+        .save(`${selectedEventDetails.name}.pdf`)
+        .then(() => {
+          // Clean up: remove the iframe and revoke the object URL
+          document.body.removeChild(iframe);
+          URL.revokeObjectURL(url);
+        });
+    };
+  };
 
   return (
     <div className="dashboard-container">
@@ -330,6 +400,9 @@ const Dashboard = () => {
                 >
                   Export to Word
                 </button>
+                <button onClick={generatePDF} className="export-button">
+                  Export to PDF
+                </button>
               </h2>
 
               <input
@@ -348,11 +421,17 @@ const Dashboard = () => {
               />
               <input
                 type="text"
-                name="village"
-                placeholder="Village"
-                required
+                name="village" // Add this name attribute
+                list="villages"
                 className="form-input"
+                placeholder="Select Village"
+                required // Optional: Add required if you want to make this field mandatory
               />
+              <datalist id="villages" name="villages">
+                {villages.map((village, index) => (
+                  <option key={index} value={village} />
+                ))}
+              </datalist>
 
               <button type="submit" className="donation-submit-button">
                 Add Donation
